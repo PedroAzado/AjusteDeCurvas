@@ -1,0 +1,38 @@
+#include <stdio.h>
+#include <math.h>
+
+#define tam 10 //número de dados
+
+main()
+{
+	float x[tam], y[tam], a, b, somax = 0, somay = 0, somax2 = 0, somaxy = 0;
+	int i;
+	FILE *in;
+	
+	in = fopen("dados.dat","r");
+	
+/*	printf("\n\nInforme os dados\n\n");
+	
+	for(i=0;i<tam;i++)
+	{
+		scanf("%f,%f", &x[i], &y[i]);
+		fprintf(in, "%f %f\n", x[i], y[i]);
+	}
+*/
+
+	for(i=0;i<tam;i++)
+		fscanf(in, "%f %f", &x[i], &y[i]);
+		
+	for(i=0;i<tam;i++)
+	{
+		somax += x[i];
+		somay += y[i];
+		somax2 += pow(x[i],2);
+		somaxy += x[i]*y[i];
+	}
+	
+	a = ((tam*somaxy) - (somax*somay))/((tam*somax2) - pow((somax),2));
+	b = (somax2*somay - somaxy*somax)/(tam*somax2 - pow(somax,2));
+	
+	printf("\n\ny = %f x + %f\n\n", a, b);
+}
